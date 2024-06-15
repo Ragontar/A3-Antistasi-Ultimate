@@ -38,3 +38,7 @@
 <br/>
 <a target="_blank" href="https://icons8.com/icon/17932/walkie-talkie">Walkie Talkie</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
 </div>
+
+## Added tweaks
+- Reduced damage to players and allies (75% and 50% respectively)
+  - A3-Antistasi-Ultimate\A3A\addons\core\functions\Revive\fn_handleDamage.sqf:44
