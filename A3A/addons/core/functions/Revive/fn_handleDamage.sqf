@@ -41,6 +41,12 @@ if (_part == "" && _damage > 0.1) then
 // Let ACE medical handle the rest (inc return value) if it's running
 if (A3A_hasACEMedical) exitWith {};
 
+// TWEAK: reduces dmg to allies by 50% and players by 75%
+_damage = 0.5 * _damage;
+
+if (isPlayer _unit) then {
+	_damage = 0.5 * _damage;
+};
 
 private _makeUnconscious =
 {
@@ -51,7 +57,7 @@ private _makeUnconscious =
 	if (leader _unit == player && _unit == player) then {
             {
 	        _x leaveVehicle (assignedVehicle _x);
-	        doGetOut _x; 
+	        doGetOut _x;
                 unassignVehicle _x;
             } forEach units player;
         };
