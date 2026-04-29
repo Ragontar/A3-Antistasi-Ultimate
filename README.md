@@ -24,7 +24,17 @@
 
   [GitHub Release](https://github.com/Antistasi-Ultimate-Community/A3-Antistasi-Ultimate/releases/latest)
 
+## Additional Icons Credits
+<div>
+<a target="_blank" href="https://icons8.com/icon/12212/hdd">HDD</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+<br/>
+<a target="_blank" href="https://icons8.com/icon/17932/walkie-talkie">Walkie Talkie</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+</div>
   [Workshop Release](https://play.antistasiultimate.com)
 
   [Extender Modding](https://github.com/Westalgie/A3UExtender)
 <hr>
+
+## Added tweaks
+- Reduced damage to players and allies (75% and 50% respectively)
+- A3-Antistasi-Ultimate\A3A\addons\core\functions\Revive\fn_handleDamage.sqf:44
