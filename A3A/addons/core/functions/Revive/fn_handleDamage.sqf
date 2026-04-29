@@ -5,15 +5,15 @@ params ["_unit","_part","_damage","_injurer","_projectile","_hitIndex","_instiga
 // Functionality unrelated to Antistasi revive
 // Helmet popping: use _hitpoint rather than _part to work around ACE calling its fake hitpoint "head"
 private _randomNumber = [1,100] call BIS_fnc_randomNum;
-if (_damage >= 1 && {_hitPoint == "hithead"} && {helmetLossChance >= _randomNumber}) then 
+if (_damage >= 1 && {_hitPoint == "hithead"} && {helmetLossChance >= _randomNumber}) then
 {
-	if (headgear _unit isNotEqualTo "") then 
+	if (headgear _unit isNotEqualTo "") then
 	{
-		if (headgear _unit isNotEqualTo "" && {_unit getVariable ["A3U_hasHelmetPopped", false] isEqualTo false}) then 
+		if (headgear _unit isNotEqualTo "" && {_unit getVariable ["A3U_hasHelmetPopped", false] isEqualTo false}) then
 		{
 			_unit setVariable ["A3U_hasHelmetPopped", true, true];
 			removeHeadgear _unit;
-			if (helmetLossSound) then 
+			if (helmetLossSound) then
 			{
 				[_unit, ["HelmetLoss", 150, 1, 0, 0]] remoteExec ["say3D", 0];
 			};
@@ -56,6 +56,9 @@ _damage = 0.5 * _damage;
 if (isPlayer _unit) then {
 	_damage = 0.5 * _damage;
 };
+// Don't bother with the unconscious nonsense, based on param values
+if (unconChanceReb < random 10) exitWith {};
+
 
 private _makeUnconscious =
 {

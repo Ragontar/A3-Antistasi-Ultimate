@@ -23,15 +23,19 @@ switch (_mode) do
     {
         // * Populate the Parameter Type Dropdown
         private _basicParamsIndex =  _paramsType lbAdd (localize "STR_antistasi_dialogs_setup_params_basic_label");
-        private _advParamsIndex = _paramsType lbAdd (localize "STR_antistasi_dialogs_setup_params_adv_label");
-        private _expParamsIndex = _paramsType lbAdd (localize "STR_antistasi_dialogs_setup_params_exp_label");
+        private _balParamsIndex = _paramsType lbAdd (localize "STR_antistasi_dialogs_setup_params_bal_label");
+        private _eqpParamsIndex = _paramsType lbAdd (localize "STR_antistasi_dialogs_setup_params_eqp_label");
+        private _bldParamsIndex = _paramsType lbAdd (localize "STR_antistasi_dialogs_setup_params_bld_label");
         private _devParamsIndex = _paramsType lbAdd (localize "STR_antistasi_dialogs_setup_params_dev_label");
+        private _extParamsIndex = _paramsType lbAdd (localize "STR_antistasi_dialogs_setup_params_ext_label");
 
         _paramsType lbSetValue [_basicParamsIndex, 0];
-        _paramsType lbSetValue [_advParamsIndex, 1];
-        _paramsType lbSetValue [_expParamsIndex, 2];
-        _paramsType lbSetValue [_devParamsIndex, 3];
-
+        _paramsType lbSetValue [_balParamsIndex, 1];
+        _paramsType lbSetValue [_eqpParamsIndex, 2];
+        _paramsType lbSetValue [_bldParamsIndex, 3];
+        _paramsType lbSetValue [_devParamsIndex, 4];
+        _paramsType lbSetValue [_extParamsIndex, 5];
+        
         _paramsType lbSetCurSel _basicParamsIndex;
 
         // * Create ALL the param controls
@@ -90,17 +94,15 @@ switch (_mode) do
                         private _invSelCtrl = _display displayCtrl A3A_IDC_SETUP_INVADERSLISTBOX;
                         private _rivEnaCtrl = _display displayCtrl (ctrlIDC _thisCtrl + 1);
 
-                        _invSelCtrl ctrlEnable !_invDisabled;
-
                         if (_invDisabled) then {
+                            _invSelCtrl ctrlEnable false;
+                            _invSelCtrl ctrlSetTooltip (localize "STR_antistasi_dialogs_setup_inv_disabled");
                             _rivEnaCtrl lbSetCurSel 0;
-                            _rivEnaCtrl ctrlSetTooltip (localize "STR_antistasi_dialogs_setup_riv_param_locked");
-                            _rivEnaCtrl setVariable ["locked", true];
-                            _rivEnaCtrl ctrlEnable false;
+                            _rivEnaCtrl ctrlSetTooltip (localize "STR_antistasi_dialogs_setup_riv_param_warning");
                         } else {
+                            _invSelCtrl ctrlEnable true;
+                            _invSelCtrl ctrlSetTooltip "";
                             _rivEnaCtrl ctrlSetTooltip "";
-                            _rivEnaCtrl setVariable ["locked", false];
-                            _rivEnaCtrl ctrlEnable true;
                         };
                     }];
                 };
@@ -112,7 +114,69 @@ switch (_mode) do
                         private _rivDisabled = (_thisCtrl lbValue _index) isEqualTo 0;
                         private _rivSelCtrl = _display displayCtrl A3A_IDC_SETUP_RIVALSLISTBOX;
 
-                        _rivSelCtrl ctrlEnable !_rivDisabled;
+                        if (_rivDisabled) then {
+                            _rivSelCtrl ctrlEnable false;
+                            _rivSelCtrl ctrlSetTooltip (localize "STR_antistasi_dialogs_setup_riv_disabled");
+                        } else {
+                            _rivSelCtrl ctrlEnable true;
+                            _rivSelCtrl ctrlSetTooltip "";
+                        };
+                    }];
+                };
+
+                if (configName _x isEqualTo "minWeaps") then {
+                    _valsCtrl ctrlAddEventHandler ["LBSelChanged", {
+                        params ["_thisCtrl", "_index"];
+                        private _display = findDisplay A3A_IDD_SETUPDIALOG;
+                        private _unlocksDisabled = (_thisCtrl lbValue _index) isEqualTo -1;
+                        private _unlockMagazinesCtrl = _display displayCtrl (ctrlIDC _thisCtrl + 2);
+                        private _unlockGLaunchersCtrl = _display displayCtrl (ctrlIDC _thisCtrl + 3);
+                        private _unlockExplosivesCtrl = _display displayCtrl (ctrlIDC _thisCtrl + 4);
+
+                        if (_unlocksDisabled) then {
+                            for "_i" from 2 to 4 do {
+                                private _ctrl = _display displayCtrl (ctrlIDC _thisCtrl + _i);
+                                _ctrl lbSetCurSel 1;
+                                _ctrl ctrlSetTooltip (localize "STR_antistasi_dialogs_setup_unlocks_disabled");
+                                _ctrl setVariable ["locked", true];
+                                _ctrl ctrlEnable false;
+                            };
+                        } else {
+                            for "_i" from 2 to 4 do {
+                                private _ctrl = _display displayCtrl (ctrlIDC _thisCtrl + _i);
+                                _ctrl ctrlSetTooltip "";
+                                _ctrl setVariable ["locked", false];
+                                _ctrl ctrlEnable true;
+                            };
+                        };
+                    }];
+                };
+
+                if (configName _x isEqualTo "minWeaps") then {
+                    _valsCtrl ctrlAddEventHandler ["LBSelChanged", {
+                        params ["_thisCtrl", "_index"];
+                        private _display = findDisplay A3A_IDD_SETUPDIALOG;
+                        private _unlocksDisabled = (_thisCtrl lbValue _index) isEqualTo -1;
+                        private _unlockMagazinesCtrl = _display displayCtrl (ctrlIDC _thisCtrl + 2);
+                        private _unlockGLaunchersCtrl = _display displayCtrl (ctrlIDC _thisCtrl + 3);
+                        private _unlockExplosivesCtrl = _display displayCtrl (ctrlIDC _thisCtrl + 4);
+
+                        if (_unlocksDisabled) then {
+                            for "_i" from 2 to 4 do {
+                                private _ctrl = _display displayCtrl (ctrlIDC _thisCtrl + _i);
+                                _ctrl lbSetCurSel 1;
+                                _ctrl ctrlSetTooltip (localize "STR_antistasi_dialogs_setup_unlocks_disabled");
+                                _ctrl setVariable ["locked", true];
+                                _ctrl ctrlEnable false;
+                            };
+                        } else {
+                            for "_i" from 2 to 4 do {
+                                private _ctrl = _display displayCtrl (ctrlIDC _thisCtrl + _i);
+                                _ctrl ctrlSetTooltip "";
+                                _ctrl setVariable ["locked", false];
+                                _ctrl ctrlEnable true;
+                            };
+                        };
                     }];
                 };
             };
@@ -129,10 +193,12 @@ switch (_mode) do
     {
         private _shownTypes = switch (lbCurSel A3A_IDC_SETUP_PARAMSTYPE) do {
             case (-1): { [] }; // lbCurSel is -1 until params tab is loaded
-            case (0): { ["Basic"] };
-            case (1): { ["Ultimate", "Script", "Plus", "Member", "Builder", "Balance", "Equipment", "Loot"] };
-            case (2): { ["Experimental"] };
-            case (3): { ["Development"] };
+            case (0): { ["Basic", "Scenario", "Member", "Script", "Timer"] };
+            case (1): { ["AI", "Balance", "RebelBalance", "AIBalance", "MiscBalance"] };
+            case (2): { ["BlackMarket", "Loot", "Unlocks", "Crates", "VehicleLoot", "MiscLoot"] };
+            case (3): { ["Builder"] };
+            case (4): { ["Experimental", "Development"] };
+            case (5): { ["Extender"] };
         };
 
         private _rowCount = -1;
@@ -209,12 +275,13 @@ switch (_mode) do
             } forEach _vals;
 
             if (_savedParams isNotEqualTo [] && {!cbChecked _newGameCtrl || cbChecked _copyGameCtrl}) then { // we're loading an existing save
-                private _locked = (getNumber (_cfg/"lockOnSave")) isNotEqualTo 0;
-                _x setVariable ["locked", _locked];
+                private _lockOnSave = (getNumber (_cfg/"lockOnSave")) isNotEqualTo 0;
+                private _lockInGame = !isNil {serverInitDone} && {(getNumber (_cfg/"lockInGame")) isNotEqualTo 0};
+                _x setVariable ["locked", _lockOnSave || _lockInGame];
 
-                if (_locked) then {
+                if (_lockOnSave || _lockInGame) then {
                     _x ctrlEnable false;
-                    _x ctrlSetTooltip (localize "STR_antistasi_dialogs_setup_param_locked");
+                    _x ctrlSetTooltip (localize (["STR_antistasi_dialogs_setup_param_locked", "STR_antistasi_dialogs_setup_param_locked_ingame"] select (_lockInGame)));
                 };
             } else {
                 // reset params to enabled if we're creating a new game or if all we did was load old params (to create a new game)

@@ -145,6 +145,7 @@ switch (_mode) do
         if (_rowIndex >= count A3A_setup_saveData) exitWith {};                      // ignore clicks below saves
         if (_rowIndex == _listboxCtrl getVariable "rowIndex") exitWith {};          // ignore if already selected
         ["selectSave", [_rowIndex]] call A3A_fnc_setupLoadgameTab;
+        ["enableParamsTab"] call A3A_fnc_setupDialog;
     };
 
     case ("saveListDoubleClick"):
@@ -234,7 +235,7 @@ switch (_mode) do
         // Set data & function for confirmation, then open confirmation box
         _display setVariable ["confirmData", [_confirmText, A3A_fnc_setupLoadgameTab, "startGameConfirm"]];
         _display setVariable ["newSaveData", _saveData];
-        diag_log format ["Prepared save data: %1", _saveData];
+        Debug_1("Prepared save data: %1", _saveData);
         createDialog "A3A_SetupConfirmDialog";
     };
 
@@ -261,6 +262,7 @@ switch (_mode) do
     {
         ["updateSaveInfoText"] call A3A_fnc_setupLoadGameTab;
         ["update"] call A3A_fnc_setupLoadgameTab;
+        ["enableParamsTab"] call A3A_fnc_setupDialog;
     };
 
     case ("copyGameCheck"):

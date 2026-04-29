@@ -97,8 +97,7 @@ class CfgFunctions
             class itemType {};
             class launcherInfo {};
             class loot {};
-            class randomRifle {};
-            class randomHandgun {};
+            class randomWeapon {};
             class transfer {};
             class unlockEquipment {};
             class vehicleSort {};
@@ -143,6 +142,7 @@ class CfgFunctions
             class getVehiclesAirSupport {};
             class getVehiclesGroundSupport {};
             class getVehiclesGroundTransport {};
+            class getVehicleSellPrice {};
             class vehicleBoxRestore {};
             class initPetros {};
             class isFrontline {};
@@ -152,10 +152,12 @@ class CfgFunctions
             class localizar {};
             class lockStatic {};
             class logPerformance {};
+            class manageFlagAccess {};
             class markerChange {};
             class moveHQ {};
             class mrkUpdate {};
             class mrkWIN {};
+            class moveOutCrew {};
             class numericRank {};
             class onHeadlessClientDisconnect {};
             class onPlayerDisconnect {};
@@ -165,6 +167,7 @@ class CfgFunctions
             class playableUnits {};
             class getSideRadioTowerInfluence {};
             class rebuildAssets {};
+            class rebuildEconomicAssets {};
             class rebuildRadioTower {};
             class relocateHQObjects {};
             class repairRuinedBuilding {};
@@ -173,7 +176,6 @@ class CfgFunctions
             class returnMuzzle {};
             class revealToPlayer {};
             class scheduler {};
-            class moveOutCrew {};
             class sellVehicle {};
             class setMarkerAlphaForSide {};
             class setPlaneLoadout {};
@@ -199,12 +201,16 @@ class CfgFunctions
             class buildingComplete {};
             class buildingPlacer {};
             class buildingPlacerStart {};
+            class handlerTerrainManipulator {};
+            class handlerTerrainObjectHiderPostInitClient {};
             class initBuildableObjects {};
             class initBuilderMonitors {};
             class initPlacerDB {};
             class lockBuilderBox {};
             class placeBuilderObjects {};
             class processBuildingTimeouts {};
+            class terrainCleaner {};
+            class terrainSmoother {};
         };
 
         class Collections {
@@ -398,6 +404,7 @@ class CfgFunctions
             class searchIntelOnLeader {};
             class selectIntel {};
             class showIntel {};
+            class showNoIntelMessage {};
         };
 
         class keybinds {
@@ -430,7 +437,7 @@ class CfgFunctions
             class LOG_Airdrop {};
             class LOG_Crashsite {};
             class LOG_Crashsite_Satellite{};
-            class LOG_Helicrash {};;
+            class LOG_Helicrash {};
             class missionRequest {};
             class REP_Antenna {};
             class RES_Deserters {};
@@ -750,6 +757,7 @@ class CfgFunctions
             class secondsToTimeSpan {};
             class systemTime_format_S {};
             class timeSpan_format {};
+            class systemTimeDurationToTimeSpan {};
         };
 
         class UI {
@@ -810,6 +818,7 @@ class CfgFunctions
             class initMovableObject {};
             class initObject {};
             class initObjectRemote {};
+            class remainingAmmo {};
             class remainingFuel {};
             class rotateItem {};
         };
