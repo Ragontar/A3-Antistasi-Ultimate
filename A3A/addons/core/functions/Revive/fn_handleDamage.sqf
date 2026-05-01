@@ -50,12 +50,14 @@ if (_part == "" && _damage > 0.1) then
 // Let ACE medical handle the rest (inc return value) if it's running
 if (A3A_hasACEMedical) exitWith {};
 
-// TWEAK: reduces dmg to allies by 50% and players by 75%
+// TWEAK: reduces dmg to allies by 50%
 _damage = 0.5 * _damage;
 
-if (isPlayer _unit) then {
-	_damage = 0.5 * _damage;
-};
+// TWEAK: reduces dmg to player by 75%
+// if (isPlayer _unit) then {
+// 	_damage = 0.5 * _damage;
+// };
+
 // Don't bother with the unconscious nonsense, based on param values
 if (unconChanceReb < random 10) exitWith {};
 
