@@ -54,7 +54,7 @@ if (A3A_hasACEMedical) exitWith {};
 private _previousDamage = [_unit getHit _part, damage _unit] select (_part isEqualTo "");  // if selection is empty then it's overall damage
 private _newDamage = _damage - _previousDamage;
 
-_damage = (_previousDamage + _newDamage * 0.5)
+_damage = (_previousDamage + _newDamage * 0.5);
 
 // TWEAK: reduces dmg to player by 75%
 // if (isPlayer _unit) then {
