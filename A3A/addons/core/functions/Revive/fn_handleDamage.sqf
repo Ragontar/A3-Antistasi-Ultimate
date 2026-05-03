@@ -51,7 +51,7 @@ if (_part == "" && _damage > 0.1) then
 if (A3A_hasACEMedical) exitWith {};
 
 // TWEAK: reduces dmg to allies by 50%
-private _previousDamage = [_unit getHit _selection, damage _unit] select (_selection isEqualTo "");  // if selection is empty then it's overall damage
+private _previousDamage = [_unit getHit _part, damage _unit] select (_part isEqualTo "");  // if selection is empty then it's overall damage
 private _newDamage = _damage - _previousDamage;
 
 _damage = (_previousDamage + _newDamage * 0.5)
